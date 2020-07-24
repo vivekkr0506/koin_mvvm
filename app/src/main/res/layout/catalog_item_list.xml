@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!-- Only view model required -->
+        <!-- <variable
+             name="vmProducts"
+             type="com.example.koin_mvvm.viewModel.ProductsViewModel" />-->
+        <variable
+            name="products"
+            type="com.example.koin_mvvm.modal.Data" />
+
+        <variable
+            name="pos"
+            type="Integer" />
+
+        <variable
+            name="handler"
+            type="com.example.koin_mvvm.utils.RecyclerViewClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/img_item"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:onClick="@{(v) -> handler.onClick(v, products,pos)}"
+                android:scaleType="fitXY"
+                android:src="@drawable/product_place_holder"
+                app:imageUrl="@{products.product_merchantdising.pr_image}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_item_name"
+                android:layout_width="293dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="Item name"
+                android:textColor="@color/color_light_black"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add_to_cart"
+                app:layout_constraintStart_toStartOf="@id/img_item"
+                app:layout_constraintTop_toBottomOf="@id/img_item"
+                app:productName="@{products.product_master.pr_name}" />
+
+            <TextView
+                android:id="@+id/txt_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="Weight"
+                android:textColor="@color/color_light_grey"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/txt_item_name"
+                app:layout_constraintTop_toBottomOf="@id/txt_item_name"
+                app:productName="@{`Net Wt.:` +products.product_merchantdising.pdp_net_wt}" />
+
+            <TextView
+                android:id="@+id/txt_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text="Price"
+                android:textColor="@color/color_light_black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_weight"
+                app:layout_constraintTop_toBottomOf="@+id/txt_item_name"
+                app:productBasePrice="@{`Price: ₹` +products.product_pricing.base_price.toString()}" />
+
+            <TextView
+                android:id="@+id/txt_base_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_price"
+                app:layout_constraintTop_toBottomOf="@+id/txt_item_name"
+                app:layout_constraintVertical_bias="0.0"
+                app:productBasePrice="@{'₹'+products.product_pricing.base_price.toString()}" />
+
+            <Button
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_button"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:text="Add to cart"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
